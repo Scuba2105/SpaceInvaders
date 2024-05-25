@@ -1,14 +1,16 @@
 import pygame
 import sys
 from settings import Settings
+from ship import Ship
 
 class MainGame():
     def __init__(self):
         # Initialise the game and specify game resources
         pygame.init()
         self.settings = Settings()
-        self.screen = pygame.display.set_mode(self.settings.screen_width, self.settings.screen_height)
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
+        self.ship = Ship(self)
         
     def run_game(self):
         # Start the main loop for the game
@@ -20,6 +22,7 @@ class MainGame():
 
             # Redraw the screen during each pass through the loop to maintain bg color
             self.screen.fill(self.settings.bg_color)
+            self.ship.blitme()
             
             # Make the most recently drawn screen visible
             pygame.display.flip()
@@ -27,7 +30,7 @@ class MainGame():
 if __name__ == "__main__":
     # Make a game instance and run the game
     main_game = MainGame()
-    main_game.run()
+    main_game.run_game()
 
 
 
